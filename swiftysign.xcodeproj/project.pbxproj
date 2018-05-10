@@ -13,6 +13,7 @@
 		E94F573F20A1FAF40062DB6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E94F573D20A1FAF40062DB6A /* Main.storyboard */; };
 		E94F574B20A1FAF40062DB6A /* swiftysignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F574A20A1FAF40062DB6A /* swiftysignTests.swift */; };
 		E94F575620A1FF500062DB6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F575520A1FF500062DB6A /* Constants.swift */; };
+		E94F575C20A22C050062DB6A /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F575B20A22C050062DB6A /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		E94F574A20A1FAF40062DB6A /* swiftysignTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftysignTests.swift; sourceTree = "<group>"; };
 		E94F574C20A1FAF40062DB6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E94F575520A1FF500062DB6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E94F575B20A22C050062DB6A /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				E94F574020A1FAF40062DB6A /* Info.plist */,
 				E94F574120A1FAF40062DB6A /* swiftysign.entitlements */,
 				E94F575520A1FF500062DB6A /* Constants.swift */,
+				E94F575B20A22C050062DB6A /* StringExtension.swift */,
 			);
 			path = swiftysign;
 			sourceTree = "<group>";
@@ -148,6 +151,11 @@
 				TargetAttributes = {
 					E94F573320A1FAF20062DB6A = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					E94F574520A1FAF40062DB6A = {
 						CreatedOnToolsVersion = 9.3;
@@ -198,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E94F575C20A22C050062DB6A /* StringExtension.swift in Sources */,
 				E94F573A20A1FAF20062DB6A /* ViewController.swift in Sources */,
 				E94F573820A1FAF20062DB6A /* AppDelegate.swift in Sources */,
 				E94F575620A1FF500062DB6A /* Constants.swift in Sources */,
@@ -351,7 +360,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = swiftysign/swiftysign.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 94X7D9LTDY;
@@ -360,6 +368,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -370,7 +379,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = swiftysign/swiftysign.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 94X7D9LTDY;
@@ -379,6 +387,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
