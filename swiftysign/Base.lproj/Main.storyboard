@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -770,20 +770,6 @@
                                     <outlet property="delegate" destination="XfG-lQ-9wD" id="bhv-5l-X5p"/>
                                 </connections>
                             </comboBox>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eiu-wj-ztK">
-                                <rect key="frame" x="494" y="191" width="131" height="18"/>
-                                <buttonCell key="cell" type="check" title="Change Bundle ID" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Ea8-aC-rB0">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i8a-zf-jkW">
-                                <rect key="frame" x="494" y="159" width="108" height="18"/>
-                                <buttonCell key="cell" type="check" title="Change Name" bezelStyle="regularSquare" imagePosition="left" inset="2" id="vzL-9b-N27">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="7ul-kR-e6k">
                                 <rect key="frame" x="20" y="119" width="16" height="16"/>
                             </progressIndicator>
@@ -857,10 +843,11 @@
                             <constraint firstAttribute="trailing" secondItem="G3T-X9-hfS" secondAttribute="trailing" constant="76" id="C22-LR-452"/>
                             <constraint firstItem="ISK-zF-AbH" firstAttribute="leading" secondItem="Gjb-Da-nY8" secondAttribute="trailing" constant="24" id="C85-xa-pvP"/>
                             <constraint firstItem="Gjb-Da-nY8" firstAttribute="top" secondItem="eJp-MP-4sd" secondAttribute="bottom" constant="10" id="ELi-T9-9zh"/>
+                            <constraint firstItem="ISK-zF-AbH" firstAttribute="trailing" secondItem="G3T-X9-hfS" secondAttribute="trailing" id="GNq-Su-tw8"/>
                             <constraint firstItem="0Yq-mJ-Nlg" firstAttribute="leading" secondItem="IS0-uc-mpQ" secondAttribute="leading" id="Gda-0I-dTa"/>
                             <constraint firstItem="eJp-MP-4sd" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="Jbf-dO-udq"/>
+                            <constraint firstItem="ohz-b2-kFn" firstAttribute="trailing" secondItem="ISK-zF-AbH" secondAttribute="trailing" id="K38-a8-zKz"/>
                             <constraint firstItem="SgA-6u-eEi" firstAttribute="centerY" secondItem="0Yq-mJ-Nlg" secondAttribute="centerY" id="KJl-GX-Djv"/>
-                            <constraint firstItem="eiu-wj-ztK" firstAttribute="centerY" secondItem="3y1-2f-5Uf" secondAttribute="centerY" id="LU2-6o-qFo"/>
                             <constraint firstItem="ene-TI-lzg" firstAttribute="trailing" secondItem="3y1-2f-5Uf" secondAttribute="trailing" id="NP0-9t-M9L"/>
                             <constraint firstItem="3y1-2f-5Uf" firstAttribute="trailing" secondItem="oOR-tF-QpX" secondAttribute="trailing" id="OVf-Cv-stp"/>
                             <constraint firstItem="ohz-b2-kFn" firstAttribute="centerY" secondItem="IS0-uc-mpQ" secondAttribute="centerY" id="Oh8-sC-6bG"/>
@@ -868,32 +855,28 @@
                             <constraint firstItem="ISK-zF-AbH" firstAttribute="centerY" secondItem="Gjb-Da-nY8" secondAttribute="centerY" id="TTb-rF-gYM"/>
                             <constraint firstItem="SgA-6u-eEi" firstAttribute="leading" secondItem="0Yq-mJ-Nlg" secondAttribute="trailing" constant="24" id="WAk-wm-ao8"/>
                             <constraint firstItem="ene-TI-lzg" firstAttribute="top" secondItem="3y1-2f-5Uf" secondAttribute="bottom" constant="10" id="YrZ-77-aE5"/>
-                            <constraint firstItem="i8a-zf-jkW" firstAttribute="centerY" secondItem="ene-TI-lzg" secondAttribute="centerY" id="aSF-M4-wVf"/>
                             <constraint firstItem="eJp-MP-4sd" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="bCV-5K-Xe2"/>
                             <constraint firstItem="oOR-tF-QpX" firstAttribute="leading" secondItem="0Yq-mJ-Nlg" secondAttribute="leading" id="c2g-Jc-CbL"/>
                             <constraint firstItem="ZQ4-zi-o56" firstAttribute="leading" secondItem="7ul-kR-e6k" secondAttribute="trailing" constant="8" id="dG3-i5-GJQ"/>
                             <constraint firstItem="ohz-b2-kFn" firstAttribute="leading" secondItem="IS0-uc-mpQ" secondAttribute="trailing" constant="24" id="dW6-de-gAb"/>
                             <constraint firstItem="oOR-tF-QpX" firstAttribute="trailing" secondItem="0Yq-mJ-Nlg" secondAttribute="trailing" id="e4c-en-6FL"/>
                             <constraint firstItem="7ul-kR-e6k" firstAttribute="top" secondItem="ene-TI-lzg" secondAttribute="bottom" constant="22" id="fl4-IU-U3O"/>
-                            <constraint firstItem="eiu-wj-ztK" firstAttribute="leading" secondItem="3y1-2f-5Uf" secondAttribute="trailing" constant="26" id="gFB-Ey-jgu"/>
                             <constraint firstItem="3y1-2f-5Uf" firstAttribute="leading" secondItem="oOR-tF-QpX" secondAttribute="leading" id="ix6-XH-xgu"/>
                             <constraint firstItem="ZQ4-zi-o56" firstAttribute="centerY" secondItem="7ul-kR-e6k" secondAttribute="centerY" id="laU-mW-enY"/>
                             <constraint firstItem="9OE-Mq-5Hv" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="lye-E8-GmM"/>
                             <constraint firstItem="ene-TI-lzg" firstAttribute="leading" secondItem="3y1-2f-5Uf" secondAttribute="leading" id="oto-eM-iCb"/>
                             <constraint firstItem="oOR-tF-QpX" firstAttribute="top" secondItem="0Yq-mJ-Nlg" secondAttribute="bottom" constant="11" id="qeM-3y-1JD"/>
                             <constraint firstItem="7ul-kR-e6k" firstAttribute="leading" secondItem="ene-TI-lzg" secondAttribute="leading" id="s55-f1-WH1"/>
-                            <constraint firstItem="i8a-zf-jkW" firstAttribute="leading" secondItem="ene-TI-lzg" secondAttribute="trailing" constant="26" id="sTC-c5-TYZ"/>
                             <constraint firstItem="0Yq-mJ-Nlg" firstAttribute="trailing" secondItem="IS0-uc-mpQ" secondAttribute="trailing" id="vlV-kU-wMj"/>
                             <constraint firstAttribute="trailing" secondItem="ZQ4-zi-o56" secondAttribute="trailing" constant="47" id="vlt-1h-bl4"/>
                             <constraint firstItem="9OE-Mq-5Hv" firstAttribute="top" secondItem="ZQ4-zi-o56" secondAttribute="bottom" constant="45" id="wfJ-L5-y34"/>
+                            <constraint firstItem="SgA-6u-eEi" firstAttribute="trailing" secondItem="ohz-b2-kFn" secondAttribute="trailing" id="y00-Xj-RmN"/>
                             <constraint firstItem="IS0-uc-mpQ" firstAttribute="trailing" secondItem="Gjb-Da-nY8" secondAttribute="trailing" id="ykg-Oc-iGW"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="browseEntitlements" destination="ohz-b2-kFn" id="b0P-Ro-k9h"/>
                         <outlet property="certificateField" destination="oOR-tF-QpX" id="pMg-kV-up8"/>
-                        <outlet property="changeBundleIdCheckBox" destination="eiu-wj-ztK" id="TdN-qc-v4T"/>
-                        <outlet property="changeNameCheckBox" destination="i8a-zf-jkW" id="8cf-3y-L9t"/>
                         <outlet property="dylibField" destination="0Yq-mJ-Nlg" id="vLb-vs-q1p"/>
                         <outlet property="entitlementsField" destination="IS0-uc-mpQ" id="NnA-2p-62i"/>
                         <outlet property="ipaPathField" destination="eJp-MP-4sd" id="Wuj-rO-qd6"/>

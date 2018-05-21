@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E91F399620A4D9FC003BE539 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E91F399520A4D9FC003BE539 /* README.md */; };
 		E94F573820A1FAF20062DB6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F573720A1FAF20062DB6A /* AppDelegate.swift */; };
 		E94F573A20A1FAF20062DB6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F573920A1FAF20062DB6A /* ViewController.swift */; };
 		E94F573C20A1FAF40062DB6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E94F573B20A1FAF40062DB6A /* Assets.xcassets */; };
@@ -14,6 +15,13 @@
 		E94F574B20A1FAF40062DB6A /* swiftysignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F574A20A1FAF40062DB6A /* swiftysignTests.swift */; };
 		E94F575620A1FF500062DB6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F575520A1FF500062DB6A /* Constants.swift */; };
 		E94F575C20A22C050062DB6A /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F575B20A22C050062DB6A /* StringExtension.swift */; };
+		E98ECF3220B3199B00532BAE /* SSUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98ECF3120B3199B00532BAE /* SSUtility.swift */; };
+		E98ECF3420B3327E00532BAE /* SSCodeSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98ECF3320B3327E00532BAE /* SSCodeSigner.swift */; };
+		E98ECF3620B33A1A00532BAE /* SSZipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98ECF3520B33A1A00532BAE /* SSZipper.swift */; };
+		E98ECF3820B33BE200532BAE /* SSProvisioningHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98ECF3720B33BE200532BAE /* SSProvisioningHelper.swift */; };
+		E9A1E01420B3081E00FDD3C9 /* SSEntitlementUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1E01320B3081E00FDD3C9 /* SSEntitlementUpdater.swift */; };
+		E9A1E01620B30CB600FDD3C9 /* SSResigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1E01520B30CB600FDD3C9 /* SSResigner.swift */; };
+		E9A1E01820B30E4C00FDD3C9 /* SSCertificateRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1E01720B30E4C00FDD3C9 /* SSCertificateRetriever.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E91F399520A4D9FC003BE539 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E94F573420A1FAF20062DB6A /* swiftysign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftysign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94F573720A1FAF20062DB6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E94F573920A1FAF20062DB6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +48,13 @@
 		E94F574C20A1FAF40062DB6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E94F575520A1FF500062DB6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E94F575B20A22C050062DB6A /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		E98ECF3120B3199B00532BAE /* SSUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSUtility.swift; sourceTree = "<group>"; };
+		E98ECF3320B3327E00532BAE /* SSCodeSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCodeSigner.swift; sourceTree = "<group>"; };
+		E98ECF3520B33A1A00532BAE /* SSZipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSZipper.swift; sourceTree = "<group>"; };
+		E98ECF3720B33BE200532BAE /* SSProvisioningHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSProvisioningHelper.swift; sourceTree = "<group>"; };
+		E9A1E01320B3081E00FDD3C9 /* SSEntitlementUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEntitlementUpdater.swift; sourceTree = "<group>"; };
+		E9A1E01520B30CB600FDD3C9 /* SSResigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSResigner.swift; sourceTree = "<group>"; };
+		E9A1E01720B30E4C00FDD3C9 /* SSCertificateRetriever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCertificateRetriever.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +78,7 @@
 		E94F572B20A1FAF20062DB6A = {
 			isa = PBXGroup;
 			children = (
+				E91F399520A4D9FC003BE539 /* README.md */,
 				E94F573620A1FAF20062DB6A /* swiftysign */,
 				E94F574920A1FAF40062DB6A /* swiftysignTests */,
 				E94F573520A1FAF20062DB6A /* Products */,
@@ -82,12 +99,19 @@
 			children = (
 				E94F573720A1FAF20062DB6A /* AppDelegate.swift */,
 				E94F573920A1FAF20062DB6A /* ViewController.swift */,
+				E9A1E01520B30CB600FDD3C9 /* SSResigner.swift */,
+				E98ECF3320B3327E00532BAE /* SSCodeSigner.swift */,
+				E98ECF3720B33BE200532BAE /* SSProvisioningHelper.swift */,
+				E9A1E01320B3081E00FDD3C9 /* SSEntitlementUpdater.swift */,
+				E9A1E01720B30E4C00FDD3C9 /* SSCertificateRetriever.swift */,
+				E98ECF3520B33A1A00532BAE /* SSZipper.swift */,
 				E94F573B20A1FAF40062DB6A /* Assets.xcassets */,
 				E94F573D20A1FAF40062DB6A /* Main.storyboard */,
 				E94F574020A1FAF40062DB6A /* Info.plist */,
 				E94F574120A1FAF40062DB6A /* swiftysign.entitlements */,
 				E94F575520A1FF500062DB6A /* Constants.swift */,
 				E94F575B20A22C050062DB6A /* StringExtension.swift */,
+				E98ECF3120B3199B00532BAE /* SSUtility.swift */,
 			);
 			path = swiftysign;
 			sourceTree = "<group>";
@@ -151,6 +175,7 @@
 				TargetAttributes = {
 					E94F573320A1FAF20062DB6A = {
 						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 0;
@@ -159,12 +184,13 @@
 					};
 					E94F574520A1FAF40062DB6A = {
 						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
 						TestTargetID = E94F573320A1FAF20062DB6A;
 					};
 				};
 			};
 			buildConfigurationList = E94F572F20A1FAF20062DB6A /* Build configuration list for PBXProject "swiftysign" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -187,6 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E91F399620A4D9FC003BE539 /* README.md in Resources */,
 				E94F573C20A1FAF40062DB6A /* Assets.xcassets in Resources */,
 				E94F573F20A1FAF40062DB6A /* Main.storyboard in Resources */,
 			);
@@ -206,9 +233,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9A1E01420B3081E00FDD3C9 /* SSEntitlementUpdater.swift in Sources */,
+				E9A1E01820B30E4C00FDD3C9 /* SSCertificateRetriever.swift in Sources */,
+				E98ECF3820B33BE200532BAE /* SSProvisioningHelper.swift in Sources */,
+				E98ECF3420B3327E00532BAE /* SSCodeSigner.swift in Sources */,
 				E94F575C20A22C050062DB6A /* StringExtension.swift in Sources */,
 				E94F573A20A1FAF20062DB6A /* ViewController.swift in Sources */,
+				E98ECF3620B33A1A00532BAE /* SSZipper.swift in Sources */,
+				E98ECF3220B3199B00532BAE /* SSUtility.swift in Sources */,
 				E94F573820A1FAF20062DB6A /* AppDelegate.swift in Sources */,
+				E9A1E01620B30CB600FDD3C9 /* SSResigner.swift in Sources */,
 				E94F575620A1FF500062DB6A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,8 +385,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -364,10 +397,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 94X7D9LTDY;
 				INFOPLIST_FILE = swiftysign/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -383,10 +413,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 94X7D9LTDY;
 				INFOPLIST_FILE = swiftysign/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -403,11 +430,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 94X7D9LTDY;
 				INFOPLIST_FILE = swiftysignTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysignTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -424,11 +447,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 94X7D9LTDY;
 				INFOPLIST_FILE = swiftysignTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysignTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
