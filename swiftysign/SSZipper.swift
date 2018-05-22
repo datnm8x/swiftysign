@@ -14,36 +14,40 @@ protocol SSZipperDelegate: class {
 
 class SSZipper: NSObject {
     
+    private weak var delegate: SSZipperDelegate?
     private var zipTask: Process?
+    private var destinationPath = "" as NSString
     
-    weak var delegate: SSZipperDelegate?
+    init(delegate: SSZipperDelegate) {
+        super.init()
+        self.delegate = delegate
+    }
     
     func doZip(archivePath: NSString) {
         
         let destinationPathComponents = archivePath.pathComponents
-        var destinationpath = "" as NSString
         
         for component in destinationPathComponents {
             if component != destinationPathComponents.last! {
-                destinationpath = destinationpath.appendingPathComponent(component) as NSString
+                destinationPath = destinationPath.appendingPathComponent(component) as NSString
             }
         }
         
         var filename = archivePath.lastPathComponent
         filename = filename.replacingOccurrences(of: ".xcarchive", with: "-resigned.ipa")
         
-        destinationpath = destinationpath.appendingPathComponent(filename) as NSString
+        destinationPath = destinationPath.appendingPathComponent(filename) as NSString
         
-        print("Destination: \(destinationpath)")
+        print("Destination: \(destinationPath)")
         
         zipTask = Process()
         zipTask!.launchPath = "/usr/bin/zip"
         zipTask!.currentDirectoryPath = SSResigner.workingPath as String
-        zipTask!.arguments = ["-qry", destinationpath, "."] as [String]
+        zipTask!.arguments = ["-qry", destinationPath, "."] as [String]
         
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkZip(timer:)), userInfo: nil, repeats: true)
         
-        print("Zipping \(destinationpath)")
+        print("Zipping \(destinationPath)")
         delegate?.updateProgress(animate: true, message: NSLocalizedString("Saving \(filename)", comment: ""))
         zipTask!.launch()
     }
@@ -58,7 +62,7 @@ class SSZipper: NSObject {
             zipTask = nil
             
             print("Zip done")
-            delegate?.updateProgress(animate: false, message: NSLocalizedString("Saved IPA", comment: ""))
+            delegate?.updateProgress(animate: false, message: NSLocalizedString("Saved IPA to \(destinationPath)", comment: ""))
             try! FileManager.default.removeItem(atPath: SSResigner.workingPath as String)
         }
     }

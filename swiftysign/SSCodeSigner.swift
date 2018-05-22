@@ -28,15 +28,18 @@ class SSCodeSigner: NSObject {
     private var verifyTask: Process?
     private var verificationResult = ""
     
-    private let zipper = SSZipper()
+    private weak var delegate: SSCodeSignerDelegate?
     
-    weak var delegate: SSCodeSignerDelegate?
+    init(delegate: SSCodeSignerDelegate) {
+        super.init()
+        self.delegate = delegate
+    }
     
-    func codeSignApp(resigner: SSResigner) {
+    func codeSignApp(settings: SSResignSettings) {
         
-        self.entitlementsFilePath = resigner.entitlementsFilePath
-        self.certificateName = resigner.certificateName as String!
-        self.newBundleId = resigner.newBundleId
+        self.entitlementsFilePath = settings.entitlementPath as String
+        self.certificateName = settings.certificateName as String!
+        self.newBundleId = settings.newBundleId
         
         var frameworksDirPath: String?
         additionalToSign = false

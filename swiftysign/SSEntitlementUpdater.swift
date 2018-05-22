@@ -15,10 +15,9 @@ protocol SSEntitlementUpdaterDelegate: class {
 
 class SSEntitlementUpdater: NSObject {
     
-    var entitlementResult = ""
+    private weak var delegate: SSEntitlementUpdaterDelegate?
     
-    weak var delegate: SSEntitlementUpdaterDelegate?
-    
+    private var entitlementResult = ""
     private var generateEntitlementsTask: Process?
     private var entitlementsResult = ""
     private var entitlementsDirPath: NSString!

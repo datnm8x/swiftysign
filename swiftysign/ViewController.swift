@@ -22,23 +22,22 @@ class ViewController: NSViewController, NSComboBoxDataSource, SSCertificateRetri
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
     @IBOutlet weak var resignAppButton: NSButton!
     
-    private let resigner = SSResigner()
+    private var resigner: SSResigner!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = NSLocalizedString("Swifty Sign", comment: "")
         
-        certificateField.dataSource = self
-        
         progressLabel.isHidden = true
         progressIndicator.isHidden = true
         
+        entitlementsField.stringValue = SSResigner.defaultEntitlementPath()
+        provisioningField.stringValue = SSResigner.defaultProvisioningPath()
         
-        resigner.setup(viewDelegate: self)
+        resigner = SSResigner(delegate: self, certificateDelegate: self)
         
-        entitlementsField.stringValue = resigner.entitlementPath as String
-        provisioningField.stringValue = resigner.provisioningFilePath as String
+        certificateField.dataSource = self
     }
     
     
@@ -48,12 +47,15 @@ class ViewController: NSViewController, NSComboBoxDataSource, SSCertificateRetri
         progressIndicator.isHidden = false
         progressIndicator.startAnimation(nil)
         
-        resigner.resign(archivePath: ipaPathField.stringValue,
-                        entitlementPath: entitlementsField.stringValue,
-                        provisioningFilePath: provisioningField.stringValue,
-                        certificateName: resigner.certificates[certificateField.indexOfSelectedItem].name,
-                        newBundleId: newBundleIdField.stringValue,
-                        newAppName: newAppNameField.stringValue)
+        var settings = SSResignSettings()
+        settings.archiveFilePath = ipaPathField.stringValue as NSString
+        settings.entitlementPath = entitlementsField.stringValue as NSString
+        settings.provisioningFilePath = provisioningField.stringValue as NSString
+        settings.certificateName = resigner.certificates[certificateField.indexOfSelectedItem].name as NSString
+        settings.newBundleId = newBundleIdField.stringValue
+        settings.newAppName = newAppNameField.stringValue
+        
+        resigner.resign(resignerSettings: settings)
     }
     
     @IBAction func browseIPA(_ sender: Any) {
@@ -101,6 +103,9 @@ class ViewController: NSViewController, NSComboBoxDataSource, SSCertificateRetri
     }
     
     func numberOfItems(in comboBox: NSComboBox) -> Int {
+        guard resigner != nil else {
+            return 0
+        }
         return resigner.certificates.count
     }
     

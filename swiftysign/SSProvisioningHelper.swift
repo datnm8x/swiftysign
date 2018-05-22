@@ -16,8 +16,12 @@ protocol SSProvisioningHelperDelegate: class {
 class SSProvisioningHelper: NSObject {
     
     private var provisioningTask: Process?
+    private weak var delegate: SSProvisioningHelperDelegate?
     
-    weak var delegate: SSProvisioningHelperDelegate?
+    init(delegate: SSProvisioningHelperDelegate) {
+        super.init()
+        self.delegate = delegate
+    }
     
     func doProvisioning(provisioningFilePath: String) {
         
@@ -89,7 +93,7 @@ class SSProvisioningHelper: NSObject {
                     delegate?.provisioningCompleted()
                 } else {
                     print("Provisioning failed -- bad identifier")
-                    delegate?.updateProgress(animate: false, message: NSLocalizedString("Provisioning Failed", comment: ""))
+                    delegate?.updateProgress(animate: false, message: NSLocalizedString("Provisioning Failed: The bundle ids do not match", comment: ""))
                 }
             } else {
                 print("Provisioning failed")

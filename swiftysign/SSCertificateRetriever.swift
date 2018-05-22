@@ -17,12 +17,16 @@ protocol SSCertificateRetrieverDelegate: class {
     func certificatesUpdated()
 }
 
-class SSCertificateRetriever {
+class SSCertificateRetriever: NSObject {
     
     var certificates = [SSCertificate]()
-    weak var delegate: SSCertificateRetrieverDelegate?
-    
+    private weak var delegate: SSCertificateRetrieverDelegate?
     private var getCertificateTask: Process?
+    
+    init(delegate: SSCertificateRetrieverDelegate?) {
+        super.init()
+        self.delegate = delegate
+    }
     
     func getCertificates() {
         
