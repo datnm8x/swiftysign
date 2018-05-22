@@ -48,7 +48,6 @@ class SSCertificateRetriever: NSObject {
     
     @objc private func checkCerts(timer: Timer) {
         guard getCertificateTask != nil else {
-            
             return
         }
         
@@ -90,8 +89,6 @@ class SSCertificateRetriever: NSObject {
         let rawResult = matchesForRegexInText("\\) (.[A-Z,0-9]*).*\n", text: securityResult! as String)
         
         OperationQueue.main.addOperation {
-            
-            
             self.certificates.removeAll()
             
             for str in rawResult {

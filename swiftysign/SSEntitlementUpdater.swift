@@ -70,22 +70,10 @@ class SSEntitlementUpdater: NSObject {
         }
     }
     
+    
+    
     private func editEntitlements() {
-        
-        //ref: https://github.com/maciekish/iReSign/pull/96/commits/674731de0615b54ce3278579a324dc93da4c62be
-        //macOS 10.12 bug: /usr/bin/security appends a junk line at the top of the XML file.
-        
-        if entitlementsResult.contains("SecPolicySetValue") {
-            let nsEntitlementResult = entitlementsResult as NSString
-            
-            let newLineLocation = nsEntitlementResult.range(of: "\n").location
-            if newLineLocation != NSNotFound {
-                var length = nsEntitlementResult.length
-                length -= newLineLocation
-                entitlementsResult = entitlementsResult.substring(newLineLocation, length: length)
-            }
-        }
-        //end macOS 10.12 bug fix.
+        trimUnnecessaryLinesFromEntitlementResult()
         
         var entitlements = entitlementsResult.propertyList() as! NSDictionary
         entitlements = entitlements["Entitlements"] as! NSDictionary
@@ -94,7 +82,6 @@ class SSEntitlementUpdater: NSObject {
         let xmlData = try! PropertyListSerialization.data(fromPropertyList: entitlements, format: PropertyListSerialization.PropertyListFormat.xml, options: 0)
         let success = FileManager.default.createFile(atPath: filePath, contents: xmlData, attributes: nil)
         print("Writing entitlements complete with \(success)")
-        //        try! xmlData.write(to: URL(string: filePath)!)
         delegate?.readyForCodeSign(filePath)
     }
     
@@ -112,5 +99,21 @@ class SSEntitlementUpdater: NSObject {
         }
         
         try! FileManager.default.createDirectory(atPath: String(entitlementsDirPath), withIntermediateDirectories: true, attributes: nil)
+    }
+    
+    private func trimUnnecessaryLinesFromEntitlementResult() {
+        //ref: https://github.com/maciekish/iReSign/pull/96/commits/674731de0615b54ce3278579a324dc93da4c62be
+        //macOS 10.12 bug: /usr/bin/security appends a junk line at the top of the XML file.
+        
+        if entitlementsResult.contains("SecPolicySetValue") {
+            let nsEntitlementResult = entitlementsResult as NSString
+            
+            let newLineLocation = nsEntitlementResult.range(of: "\n").location
+            if newLineLocation != NSNotFound {
+                var length = nsEntitlementResult.length
+                length -= newLineLocation
+                entitlementsResult = entitlementsResult.substring(newLineLocation, length: length)
+            }
+        }
     }
 }

@@ -41,31 +41,21 @@ class SSCodeSigner: NSObject {
         self.certificateName = settings.certificateName as String!
         self.newBundleId = settings.newBundleId
         
-        var frameworksDirPath: String?
         additionalToSign = false
         additionalResourcesToSign.removeAll()
         
-        frameworksDirPath = SSResigner.appPath.appendingPathComponent(kFrameworksDirName)
-        print("Found \(SSResigner.appPath)")
-        
-        if FileManager.default.fileExists(atPath: frameworksDirPath!) {
-            print("Found \(frameworksDirPath!)")
-            additionalToSign = true
-            let frameworkContents = try! FileManager.default.contentsOfDirectory(atPath: frameworksDirPath!)
-            for frameworkFile in frameworkContents {
-                let ext = (frameworkFile as NSString).pathExtension.lowercased()
-                if ext == "framework" || ext == "dylib" {
-                    let frameworkPath = (frameworksDirPath! as NSString).appendingPathComponent(frameworkFile)
-                    print("Found \(frameworkPath)")
-                    additionalResourcesToSign.append(frameworkPath)
-                }
-            }
-        }
         delegate?.updateProgress(animate: true, message: NSLocalizedString("Codesigning \(SSResigner.appPath.lastPathComponent)", comment: ""))
+        updateFrameworksToSign()
         
-        
-        // Sign plugins and other executables except the main one
-        
+        if additionalToSign {
+            self.signFile(filePath: additionalResourcesToSign.last! as NSString)
+            additionalResourcesToSign.removeLast()
+        } else {
+            self.signFile(filePath: SSResigner.appPath)
+        }
+    }
+    
+    private func updateFrameworksToSign() {
         let dir = SSResigner.appPath
         let dirEnumerator = FileManager.default.enumerator(atPath: dir as String)!
         
@@ -86,12 +76,52 @@ class SSCodeSigner: NSObject {
                 }
             }
         }
+    }
+    
+    @available(*, deprecated)
+    private func determineFrameworksToSign() {
+        let frameworksDirPath = SSResigner.appPath.appendingPathComponent(kFrameworksDirName)
+        print("Checking for frameworks and plugins to sign")
         
-        if additionalToSign {
-            self.signFile(filePath: additionalResourcesToSign.last! as NSString)
-            additionalResourcesToSign.removeLast()
-        } else {
-            self.signFile(filePath: SSResigner.appPath)
+        if FileManager.default.fileExists(atPath: frameworksDirPath) {
+            print("Found \(frameworksDirPath)")
+            additionalToSign = true
+            let frameworkContents = try! FileManager.default.contentsOfDirectory(atPath: frameworksDirPath)
+            for frameworkFile in frameworkContents {
+                let ext = (frameworkFile as NSString).pathExtension.lowercased()
+                if ext == "framework" || ext == "dylib" {
+                    let frameworkPath = (frameworksDirPath as NSString).appendingPathComponent(frameworkFile)
+                    print("Found framework: \(frameworkPath)")
+                    additionalResourcesToSign.append(frameworkPath)
+                }
+            }
+        }
+    }
+    
+    fileprivate func updateWatchKitExtensionWithNewBundleId(_ plist: NSMutableDictionary!, _ newBundleIdPrefix: String) {
+        if plist["NSExtension"] != nil && (plist["NSExtension"] as! NSDictionary)["NSExtensionAttributes"] != nil {
+            let extensionAttributes = ((plist["NSExtension"] as! NSDictionary)["NSExtensionAttributes"] as! NSDictionary).mutableCopy() as! NSMutableDictionary
+            let wkAppBundleIdentifier = extensionAttributes["WKAppBundleIdentifier"] as! NSString
+            let newWkAppBundleIdentifier = "\(newBundleIdPrefix).\(wkAppBundleIdentifier.components(separatedBy: ".").last!)"
+            
+            print(
+                """
+                ==============
+                old: \(wkAppBundleIdentifier as String)
+                new: \(newWkAppBundleIdentifier)
+                """
+            )
+            
+            extensionAttributes["WKAppBundleIdentifier"] = newWkAppBundleIdentifier
+            
+            let extensionDictionary = (plist["NSExtension"] as! NSDictionary).mutableCopy() as! NSMutableDictionary
+            extensionDictionary["NSExtensionAttributes"] = extensionAttributes
+            
+            plist.setObject(extensionDictionary, forKey: "NSExtension" as NSCopying)
+        }
+        
+        if plist.object(forKey: "WKCompanionAppBundleIdentifier") != nil {
+            plist.setObject(newBundleIdPrefix, forKey: "WKCompanionAppBundleIdentifier" as NSCopying)
         }
     }
     
@@ -113,70 +143,23 @@ class SSCodeSigner: NSObject {
             
             plist.setObject(newBundleId, forKey: bundleIdKey as NSCopying)
             
-            if plist["NSExtension"] != nil && (plist["NSExtension"] as! NSDictionary)["NSExtensionAttributes"] != nil {
-                let extensionAttributes = ((plist["NSExtension"] as! NSDictionary)["NSExtensionAttributes"] as! NSDictionary).mutableCopy() as! NSMutableDictionary
-                let wkAppBundleIdentifier = extensionAttributes["WKAppBundleIdentifier"] as! NSString
-                let newWkAppBundleIdentifier = "\(newBundleIdPrefix).\(wkAppBundleIdentifier.components(separatedBy: ".").last!)"
-                
-                print(
-                    """
-                    ==============
-                    old: \(wkAppBundleIdentifier as String)
-                    new: \(newWkAppBundleIdentifier)
-                    """
-                )
-                
-                extensionAttributes["WKAppBundleIdentifier"] = newWkAppBundleIdentifier
-                
-                let extensionDictionary = (plist["NSExtension"] as! NSDictionary).mutableCopy() as! NSMutableDictionary
-                extensionDictionary["NSExtensionAttributes"] = extensionAttributes
-                
-                plist.setObject(extensionDictionary, forKey: "NSExtension" as NSCopying)
-            }
-            
-            if plist.object(forKey: "WKCompanionAppBundleIdentifier") != nil {
-                plist.setObject(newBundleIdPrefix, forKey: "WKCompanionAppBundleIdentifier" as NSCopying)
-            }
+            updateWatchKitExtensionWithNewBundleId(plist, newBundleIdPrefix)
             
             let xmlData = try! PropertyListSerialization.data(fromPropertyList: plist, format: PropertyListSerialization.PropertyListFormat.xml, options: 0)
             FileManager.default.createFile(atPath: filePath, contents: xmlData, attributes: nil)
             return true
         }
         
-        
         return false
-        
     }
     
     private func signFile(filePath: NSString) {
         print("Codesigning \(filePath)")
         delegate?.updateProgress(animate: true, message: NSLocalizedString("Codesigning \(filePath)", comment: ""))
         
-        var arguments = [String]()
-        arguments.append("-fs")
-        arguments.append(certificateName)
-        arguments.append("--no-strict")
-        arguments.append(filePath as String)
+        removeBundleResourceSpecificationFromPlist(filePath)
         
-        
-        let infoPath = "\(filePath)/\(kInfoPlistFilename)"
-        
-        //        do {
-        //            let rawData = try Data(contentsOf: URL(fileURLWithPath: infoPlistPath))
-        //            let realData = try PropertyListSerialization.propertyList(from: rawData, format: nil) as! [String:Any]
-        //        } catch let error as NSError {
-        //            print(error)
-        //        }
-        
-        let infoDict = NSMutableDictionary(contentsOfFile: infoPath)
-        infoDict?.removeObject(forKey: "CFBundleResourceSpecification")
-        infoDict?.write(toFile: infoPath, atomically: true)
-        
-        if entitlementsFilePath.length() > 0 {
-            print("Adding entitlements with \(entitlementsFilePath)")
-            arguments.append("--entitlements=\(entitlementsFilePath)")
-        }
-        
+        let arguments = getSigningArguments(filePath: filePath)
         print("Signing arguments:\n \(arguments)")
         
         codesignTask = Process()
@@ -222,7 +205,7 @@ class SSCodeSigner: NSObject {
     }
     
     private func verifySignature() {
-        
+        verificationResult = ""
         verifyTask = Process()
         let pipe = Pipe()
         
@@ -246,6 +229,20 @@ class SSCodeSigner: NSObject {
         print("Result of verify: \(verificationResult)")
     }
     
+    private func getSigningArguments(filePath: NSString) -> [String] {
+        var arguments = [String]()
+        arguments.append("-fs")
+        arguments.append(certificateName)
+        arguments.append("--no-strict")
+        arguments.append(filePath as String)
+        
+        if entitlementsFilePath.length() > 0 {
+            print("Adding entitlements with \(entitlementsFilePath)")
+            arguments.append("--entitlements=\(entitlementsFilePath)")
+        }
+        return arguments
+    }
+    
     @objc private func checkVerificationProcess(timer: Timer) {
         guard verifyTask != nil else {
             return
@@ -254,7 +251,7 @@ class SSCodeSigner: NSObject {
         if !verifyTask!.isRunning {
             timer.invalidate()
             verifyTask = nil
-            if verificationResult.length() == 0 {
+            if verificationSucceeded {
                 print("Verification done")
                 delegate?.updateProgress(animate: true, message: NSLocalizedString("Verification Complete", comment: ""))
                 delegate?.signingComplete()
@@ -262,5 +259,16 @@ class SSCodeSigner: NSObject {
                 delegate?.updateProgress(animate: false, message: NSLocalizedString("Signing Verification Failed", comment: ""))
             }
         }
+    }
+    
+    private func removeBundleResourceSpecificationFromPlist(_ filePath: NSString) {
+        let infoPath = "\(filePath)/\(kInfoPlistFilename)"
+        let infoDict = NSMutableDictionary(contentsOfFile: infoPath)
+        infoDict?.removeObject(forKey: "CFBundleResourceSpecification")
+        infoDict?.write(toFile: infoPath, atomically: true)
+    }
+    
+    private var verificationSucceeded: Bool {
+        return verificationResult.length() == 0
     }
 }
