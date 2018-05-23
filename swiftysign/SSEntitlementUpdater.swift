@@ -18,7 +18,6 @@ class SSEntitlementUpdater: NSObject {
     private weak var delegate: SSEntitlementUpdaterDelegate?
     
     private var entitlementResult = ""
-    private var generateEntitlementsTask: Process?
     private var entitlementsResult = ""
     private var entitlementsDirPath: NSString!
     private var workingPath: String!
@@ -42,35 +41,27 @@ class SSEntitlementUpdater: NSObject {
         print("Generating entitlements")
         
         let pipe = Pipe()
-        generateEntitlementsTask = Process()
-        generateEntitlementsTask!.launchPath = "/usr/bin/security"
-        generateEntitlementsTask!.arguments = ["cms", "-D", "-i", provisioningFilePath]
-        generateEntitlementsTask!.currentDirectoryPath = workingPath
-        generateEntitlementsTask!.standardError = pipe
-        generateEntitlementsTask!.standardOutput = pipe
+        let generateEntitlementsTask = Process()
+        generateEntitlementsTask.launchPath = "/usr/bin/security"
+        generateEntitlementsTask.arguments = ["cms", "-D", "-i", provisioningFilePath]
+        generateEntitlementsTask.currentDirectoryPath = workingPath
+        generateEntitlementsTask.standardError = pipe
+        generateEntitlementsTask.standardOutput = pipe
         
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkEntitlementsFix(timer:)), userInfo: nil, repeats: true)
+        generateEntitlementsTask.launch()
+        generateEntitlementsTask.waitUntilExit()
         
-        generateEntitlementsTask!.launch()
+        entitlementsResult = String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8)!
+        print("Result of entitlement change: \(entitlementsResult)")
         
-        Thread.detachNewThreadSelector(#selector(watchEntitlements(handle:)), toTarget: self, with: pipe)
+        checkEntitlementsFix()
     }
     
-    @objc private func checkEntitlementsFix(timer: Timer) {
-        guard generateEntitlementsTask != nil else {
-            return
-        }
-        
-        if !generateEntitlementsTask!.isRunning {
-            timer.invalidate()
-            generateEntitlementsTask = nil
-            print("Entitlements fixed")
-            delegate?.updateProgress(animate: true, message: NSLocalizedString("Entitlements Generated", comment: ""))
-            editEntitlements()
-        }
+    private func checkEntitlementsFix() {
+        print("Entitlements fixed")
+        delegate?.updateProgress(animate: true, message: NSLocalizedString("Entitlements Generated", comment: ""))
+        editEntitlements()
     }
-    
-    
     
     private func editEntitlements() {
         trimUnnecessaryLinesFromEntitlementResult()

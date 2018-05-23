@@ -15,7 +15,6 @@ protocol SSZipperDelegate: class {
 class SSZipper: NSObject {
     
     private weak var delegate: SSZipperDelegate?
-    private var zipTask: Process?
     private var destinationPath = "" as NSString
     
     init(delegate: SSZipperDelegate) {
@@ -40,30 +39,21 @@ class SSZipper: NSObject {
         
         print("Destination: \(destinationPath)")
         
-        zipTask = Process()
-        zipTask!.launchPath = "/usr/bin/zip"
-        zipTask!.currentDirectoryPath = SSResigner.workingPath as String
-        zipTask!.arguments = ["-qry", destinationPath, "."] as [String]
-        
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkZip(timer:)), userInfo: nil, repeats: true)
+        let zipTask = Process()
+        zipTask.launchPath = "/usr/bin/zip"
+        zipTask.currentDirectoryPath = SSResigner.workingPath as String
+        zipTask.arguments = ["-qry", destinationPath, "."] as [String]
         
         print("Zipping \(destinationPath)")
         delegate?.updateProgress(animate: true, message: NSLocalizedString("Saving \(filename)", comment: ""))
-        zipTask!.launch()
+        zipTask.launch()
+        zipTask.waitUntilExit()
+        checkZip()
     }
     
-    @objc private func checkZip(timer: Timer) {
-        guard zipTask != nil else {
-            return
-        }
-        
-        if !zipTask!.isRunning {
-            timer.invalidate()
-            zipTask = nil
-            
-            print("Zip done")
-            delegate?.updateProgress(animate: false, message: NSLocalizedString("Saved IPA to \(destinationPath)", comment: ""))
-            try! FileManager.default.removeItem(atPath: SSResigner.workingPath as String)
-        }
+    private func checkZip() {
+        print("Zip done")
+        delegate?.updateProgress(animate: false, message: NSLocalizedString("Saved IPA to \(destinationPath)", comment: ""))
+        try! FileManager.default.removeItem(atPath: SSResigner.workingPath as String)
     }
 }

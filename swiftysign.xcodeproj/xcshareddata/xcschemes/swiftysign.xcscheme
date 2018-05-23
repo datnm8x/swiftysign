@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E94F573320A1FAF20062DB6A"
-               BuildableName = "swiftysign.app"
-               BlueprintName = "swiftysign"
+               BuildableName = "swiftysignapp.app"
+               BlueprintName = "swiftysignapp"
                ReferencedContainer = "container:swiftysign.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,8 +44,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E94F573320A1FAF20062DB6A"
-            BuildableName = "swiftysign.app"
-            BlueprintName = "swiftysign"
+            BuildableName = "swiftysignapp.app"
+            BlueprintName = "swiftysignapp"
             ReferencedContainer = "container:swiftysign.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -68,8 +68,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E94F573320A1FAF20062DB6A"
-            BuildableName = "swiftysign.app"
-            BlueprintName = "swiftysign"
+            BuildableName = "swiftysignapp.app"
+            BlueprintName = "swiftysignapp"
             ReferencedContainer = "container:swiftysign.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -87,8 +87,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E94F573320A1FAF20062DB6A"
-            BuildableName = "swiftysign.app"
-            BlueprintName = "swiftysign"
+            BuildableName = "swiftysignapp.app"
+            BlueprintName = "swiftysignapp"
             ReferencedContainer = "container:swiftysign.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

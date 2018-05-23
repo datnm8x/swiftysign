@@ -15,7 +15,6 @@ protocol SSProvisioningHelperDelegate: class {
 
 class SSProvisioningHelper: NSObject {
     
-    private var provisioningTask: Process?
     private weak var delegate: SSProvisioningHelperDelegate?
     
     init(delegate: SSProvisioningHelperDelegate) {
@@ -32,26 +31,14 @@ class SSProvisioningHelper: NSObject {
         }
         
         let targetPath = SSResigner.appPath.appendingPathComponent("embedded.mobileprovision")
-        provisioningTask = Process()
-        provisioningTask!.launchPath = "/bin/cp"
-        provisioningTask!.arguments = [provisioningFilePath, targetPath]
+        let provisioningTask = Process()
+        provisioningTask.launchPath = "/bin/cp"
+        provisioningTask.arguments = [provisioningFilePath, targetPath]
         
-        provisioningTask!.launch()
+        provisioningTask.launch()
+        provisioningTask.waitUntilExit()
         
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkProvisioning(timer:)), userInfo: nil, repeats: true)
-    }
-    
-    @objc private func checkProvisioning(timer: Timer) {
-        guard provisioningTask != nil else {
-            return
-        }
-        
-        if !provisioningTask!.isRunning {
-            timer.invalidate()
-            provisioningTask = nil
-            
-            verifyProvisioningSucceeded()
-        }
+        verifyProvisioningSucceeded()
     }
     
     private func verifyProvisioningSucceeded() {

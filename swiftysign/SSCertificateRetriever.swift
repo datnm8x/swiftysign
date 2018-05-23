@@ -21,7 +21,6 @@ class SSCertificateRetriever: NSObject {
     
     var certificates = [SSCertificate]()
     private weak var delegate: SSCertificateRetrieverDelegate?
-    private var getCertificateTask: Process?
     
     init(delegate: SSCertificateRetrieverDelegate?) {
         super.init()
@@ -30,44 +29,34 @@ class SSCertificateRetriever: NSObject {
     
     func getCertificates() {
         
-        getCertificateTask = Process()
+        let getCertificateTask = Process()
         let pipe = Pipe()
         
-        getCertificateTask!.launchPath = "/usr/bin/security"
-        getCertificateTask!.arguments = ["find-identity", "-v", "-p", "codesigning"]
-        getCertificateTask!.standardOutput = pipe
-        getCertificateTask!.standardError = pipe
+        getCertificateTask.launchPath = "/usr/bin/security"
+        getCertificateTask.arguments = ["find-identity", "-v", "-p", "codesigning"]
+        getCertificateTask.standardOutput = pipe
+        getCertificateTask.standardError = pipe
         
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkCerts(timer:)), userInfo: nil, repeats: true)
-        
-        getCertificateTask!.launch()
+        getCertificateTask.launch()
+        getCertificateTask.waitUntilExit()
         
         let handle = pipe.fileHandleForReading
-        Thread.detachNewThreadSelector(#selector(watchCertificates(handle:)), toTarget: self, with: handle)
+        watchCertificates(handle: handle)
+        checkCerts()
     }
     
-    @objc private func checkCerts(timer: Timer) {
-        guard getCertificateTask != nil else {
-            return
-        }
-        
-        if !getCertificateTask!.isRunning {
-            timer.invalidate()
-            getCertificateTask = nil
-            
-            if certificates.count > 0 {
-                print("Retrieved the certificates...")
-                if UserDefaults.standard.value(forKey: "CERT_INDEX") != nil {
-                    let selectedIndex = UserDefaults.standard.integer(forKey: "CERT_INDEX")
-                    if selectedIndex != -1 {
-                        delegate?.certificatesUpdated()
-                    }
+    private func checkCerts() {
+        if certificates.count > 0 {
+            print("Retrieved the certificates...")
+            if UserDefaults.standard.value(forKey: "CERT_INDEX") != nil {
+                let selectedIndex = UserDefaults.standard.integer(forKey: "CERT_INDEX")
+                if selectedIndex != -1 {
+                    delegate?.certificatesUpdated()
                 }
-            } else {
-                print("No certificates")
             }
+        } else {
+            print("No certificates")
         }
-        
     }
     
     func indexOfCertificate(certificateName: String) -> Int {
@@ -76,7 +65,7 @@ class SSCertificateRetriever: NSObject {
         }) ?? -1
     }
     
-    @objc private func watchCertificates(handle: FileHandle) {
+    private func watchCertificates(handle: FileHandle) {
         
         let data = handle.readDataToEndOfFile()
         let securityResult = NSString(data: data, encoding: String.Encoding.utf8.rawValue)

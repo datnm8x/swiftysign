@@ -18,14 +18,8 @@ class SSCodeSigner: NSObject {
     private var entitlementsFilePath = ""
     private var certificateName: String!
     private var newBundleId: String!
-    
     private var additionalResourcesToSign = [String]()
     private var additionalToSign = false
-    
-    private var codesignResult = ""
-    private var codesignTask: Process?
-    
-    private var verifyTask: Process?
     private var verificationResult = ""
     
     private weak var delegate: SSCodeSignerDelegate?
@@ -48,8 +42,7 @@ class SSCodeSigner: NSObject {
         updateFrameworksToSign()
         
         if additionalToSign {
-            self.signFile(filePath: additionalResourcesToSign.last! as NSString)
-            additionalResourcesToSign.removeLast()
+            self.signFile(filePath: additionalResourcesToSign.popLast()! as NSString)
         } else {
             self.signFile(filePath: SSResigner.appPath)
         }
@@ -162,72 +155,56 @@ class SSCodeSigner: NSObject {
         let arguments = getSigningArguments(filePath: filePath)
         print("Signing arguments:\n \(arguments)")
         
-        codesignTask = Process()
+        let codesignTask = Process()
         let pipe = Pipe()
         
-        codesignTask!.launchPath = "/usr/bin/codesign"
-        codesignTask!.arguments = arguments
-        codesignTask!.standardOutput = pipe
-        codesignTask!.standardError = pipe
+        codesignTask.launchPath = "/usr/bin/codesign"
+        codesignTask.arguments = arguments
+        codesignTask.standardOutput = pipe
+        codesignTask.standardError = pipe
         
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkCodeSigning(timer:)), userInfo: nil, repeats: true)
-        
-        codesignTask!.launch()
-        Thread.detachNewThreadSelector(#selector(watchCodeSigning(streamHandle:)), toTarget: self, with: pipe)
-    }
-    
-    @objc private func watchCodeSigning(streamHandle: Pipe) {
-        codesignResult = String(data: streamHandle.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8)!
+        codesignTask.launch()
+        codesignTask.waitUntilExit()
+        let codesignResult = String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8)!
         print("Result of codesign: \(codesignResult)")
+        
+        checkCodeSigning()
     }
     
-    
-    @objc private func checkCodeSigning(timer: Timer) {
-        guard codesignTask != nil else {
-            return
-        }
-        
-        if !codesignTask!.isRunning {
-            timer.invalidate()
-            codesignTask = nil
-            if additionalResourcesToSign.count > 0 {
-                signFile(filePath: additionalResourcesToSign.last! as NSString)
-                additionalResourcesToSign.removeLast()
-            } else if additionalToSign {
-                additionalToSign = false
-                signFile(filePath: SSResigner.appPath)
-            } else {
-                print("Codesigning done")
-                delegate?.updateProgress(animate: true, message: NSLocalizedString("Codesigning completed", comment: ""))
-                verifySignature()
-            }
+    private func checkCodeSigning() {
+        if additionalResourcesToSign.count > 0 {
+            signFile(filePath: additionalResourcesToSign.popLast()! as NSString)
+        } else if additionalToSign {
+            additionalToSign = false
+            signFile(filePath: SSResigner.appPath)
+        } else {
+            print("Codesigning done")
+            delegate?.updateProgress(animate: true, message: NSLocalizedString("Codesigning completed", comment: ""))
+            verifySignature()
         }
     }
     
     private func verifySignature() {
         verificationResult = ""
-        verifyTask = Process()
+        let verifyTask = Process()
         let pipe = Pipe()
         
-        verifyTask!.launchPath = "/usr/bin/codesign"
-        verifyTask!.arguments = ["-v", SSResigner.appPath as String]
-        verifyTask!.standardOutput = pipe
-        verifyTask!.standardError = pipe
-        
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkVerificationProcess(timer:)), userInfo: nil, repeats: true)
+        verifyTask.launchPath = "/usr/bin/codesign"
+        verifyTask.arguments = ["-v", SSResigner.appPath as String]
+        verifyTask.standardOutput = pipe
+        verifyTask.standardError = pipe
         
         print("Verifying \(SSResigner.appPath)")
         delegate?.updateProgress(animate: true, message: NSLocalizedString("Verifying \(SSResigner.appPath.lastPathComponent)", comment: ""))
         
-        verifyTask!.launch()
+        verifyTask.launch()
+        verifyTask.waitUntilExit()
+        verificationResult = String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8)!
+        print("Result of verify: \(verificationResult)")
         
-        Thread.detachNewThreadSelector(#selector(watchVerificationProcess(streamHandle:)), toTarget: self, with: pipe)
+        checkVerificationProcess()
     }
     
-    @objc private func watchVerificationProcess(streamHandle: Pipe) {
-        verificationResult = String(data: streamHandle.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8)!
-        print("Result of verify: \(verificationResult)")
-    }
     
     private func getSigningArguments(filePath: NSString) -> [String] {
         var arguments = [String]()
@@ -243,21 +220,13 @@ class SSCodeSigner: NSObject {
         return arguments
     }
     
-    @objc private func checkVerificationProcess(timer: Timer) {
-        guard verifyTask != nil else {
-            return
-        }
-        
-        if !verifyTask!.isRunning {
-            timer.invalidate()
-            verifyTask = nil
-            if verificationSucceeded {
-                print("Verification done")
-                delegate?.updateProgress(animate: true, message: NSLocalizedString("Verification Complete", comment: ""))
-                delegate?.signingComplete()
-            } else {
-                delegate?.updateProgress(animate: false, message: NSLocalizedString("Signing Verification Failed", comment: ""))
-            }
+    private func checkVerificationProcess() {
+        if verificationSucceeded {
+            print("Verification done")
+            delegate?.updateProgress(animate: true, message: NSLocalizedString("Verification Complete", comment: ""))
+            delegate?.signingComplete()
+        } else {
+            delegate?.updateProgress(animate: false, message: NSLocalizedString("Signing Verification Failed", comment: ""))
         }
     }
     

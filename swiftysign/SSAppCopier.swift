@@ -18,7 +18,6 @@ class SSAppCopier: NSObject {
     private var newAppName: String!
     private var newBundleId: String!
     private var archiveFilePath: NSString!
-    private var copyTask: Process?
     
     private weak var delegate: SSAppCopierDelegate?
     
@@ -44,12 +43,12 @@ class SSAppCopier: NSObject {
             let applicationPath = try getApplicationPath()
             delegate?.updateProgress(animate: true, message: NSLocalizedString("Copying .xcarchive app to \(kPayloadDirName) path", comment: ""))
             
-            copyTask = Process()
-            copyTask!.launchPath = "/bin/cp"
-            copyTask!.arguments = ["-r", applicationPath, payloadPath]
-            
-            Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkCopy(timer:)), userInfo: nil, repeats: true)
-            copyTask!.launch()
+            let copyTask = Process()
+            copyTask.launchPath = "/bin/cp"
+            copyTask.arguments = ["-r", applicationPath, payloadPath]
+            copyTask.launch()
+            copyTask.waitUntilExit()
+            checkCopy()
         } catch SSError.errorOpeningPlist {
             delegate?.updateProgress(animate: false, message: NSLocalizedString("Error opening plist", comment: ""))
         } catch {
@@ -57,30 +56,20 @@ class SSAppCopier: NSObject {
         }
     }
     
-    @objc private func checkCopy(timer: Timer) {
-        guard copyTask != nil else {
-            timer.invalidate()
-            return
+    private func checkCopy() {
+        print("Copy done")
+        delegate?.updateProgress(animate: true, message: NSLocalizedString("xcarchive copied", comment: ""))
+        
+        if newBundleId.length() > 0 {
+            changeAppBundleID()
+            changeMetaDataBundleID()
         }
         
-        if !copyTask!.isRunning {
-            timer.invalidate()
-            copyTask = nil
-            
-            print("Copy done")
-            delegate?.updateProgress(animate: true, message: NSLocalizedString("xcarchive copied", comment: ""))
-            
-            if newBundleId.length() > 0 {
-                changeAppBundleID()
-                changeMetaDataBundleID()
-            }
-            
-            if newAppName.length() > 0 {
-                changeDisplayName()
-            }
-
-            delegate?.doneCopying()
+        if newAppName.length() > 0 {
+            changeDisplayName()
         }
+        
+        delegate?.doneCopying()
     }
     
     private func changeAppBundleID() {

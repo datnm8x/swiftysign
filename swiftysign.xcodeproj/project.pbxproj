@@ -25,6 +25,19 @@
 		E9E2B40320B46A0400AB88B0 /* SSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E2B40220B46A0400AB88B0 /* SSError.swift */; };
 		E9E2B40520B470CB00AB88B0 /* SSAppCopier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E2B40420B470CB00AB88B0 /* SSAppCopier.swift */; };
 		E9E2B40720B473A000AB88B0 /* SSResignSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E2B40620B473A000AB88B0 /* SSResignSettings.swift */; };
+		E9E2B40F20B4B79800AB88B0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E2B40E20B4B79800AB88B0 /* main.swift */; };
+		E9E2B41320B4B86F00AB88B0 /* SSResigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1E01520B30CB600FDD3C9 /* SSResigner.swift */; };
+		E9E2B41420B4B86F00AB88B0 /* SSCodeSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98ECF3320B3327E00532BAE /* SSCodeSigner.swift */; };
+		E9E2B41520B4B86F00AB88B0 /* SSAppCopier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E2B40420B470CB00AB88B0 /* SSAppCopier.swift */; };
+		E9E2B41620B4B86F00AB88B0 /* SSProvisioningHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98ECF3720B33BE200532BAE /* SSProvisioningHelper.swift */; };
+		E9E2B41720B4B86F00AB88B0 /* SSEntitlementUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1E01320B3081E00FDD3C9 /* SSEntitlementUpdater.swift */; };
+		E9E2B41820B4B86F00AB88B0 /* SSCertificateRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A1E01720B30E4C00FDD3C9 /* SSCertificateRetriever.swift */; };
+		E9E2B41920B4B86F00AB88B0 /* SSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E2B40220B46A0400AB88B0 /* SSError.swift */; };
+		E9E2B41A20B4B86F00AB88B0 /* SSZipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98ECF3520B33A1A00532BAE /* SSZipper.swift */; };
+		E9E2B41B20B4B87700AB88B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F575520A1FF500062DB6A /* Constants.swift */; };
+		E9E2B41C20B4B87700AB88B0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94F575B20A22C050062DB6A /* StringExtension.swift */; };
+		E9E2B41D20B4B87700AB88B0 /* SSUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98ECF3120B3199B00532BAE /* SSUtility.swift */; };
+		E9E2B41E20B4B87700AB88B0 /* SSResignSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E2B40620B473A000AB88B0 /* SSResignSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,9 +50,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E9E2B40A20B4B79800AB88B0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		E91F399520A4D9FC003BE539 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		E94F573420A1FAF20062DB6A /* swiftysign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftysign.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E94F573420A1FAF20062DB6A /* swiftysignapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftysignapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94F573720A1FAF20062DB6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E94F573920A1FAF20062DB6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E94F573B20A1FAF40062DB6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +86,8 @@
 		E9E2B40220B46A0400AB88B0 /* SSError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSError.swift; sourceTree = "<group>"; };
 		E9E2B40420B470CB00AB88B0 /* SSAppCopier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSAppCopier.swift; sourceTree = "<group>"; };
 		E9E2B40620B473A000AB88B0 /* SSResignSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSResignSettings.swift; sourceTree = "<group>"; };
+		E9E2B40C20B4B79800AB88B0 /* swiftysign */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftysign; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9E2B40E20B4B79800AB88B0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +105,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E9E2B40920B4B79800AB88B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -87,6 +121,7 @@
 				E91F399520A4D9FC003BE539 /* README.md */,
 				E94F573620A1FAF20062DB6A /* swiftysign */,
 				E94F574920A1FAF40062DB6A /* swiftysignTests */,
+				E9E2B40D20B4B79800AB88B0 /* swiftysign */,
 				E94F573520A1FAF20062DB6A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,8 +129,9 @@
 		E94F573520A1FAF20062DB6A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E94F573420A1FAF20062DB6A /* swiftysign.app */,
+				E94F573420A1FAF20062DB6A /* swiftysignapp.app */,
 				E94F574620A1FAF40062DB6A /* swiftysignTests.xctest */,
+				E9E2B40C20B4B79800AB88B0 /* swiftysign */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,14 +149,14 @@
 				E9A1E01720B30E4C00FDD3C9 /* SSCertificateRetriever.swift */,
 				E9E2B40220B46A0400AB88B0 /* SSError.swift */,
 				E98ECF3520B33A1A00532BAE /* SSZipper.swift */,
-				E94F573B20A1FAF40062DB6A /* Assets.xcassets */,
-				E94F573D20A1FAF40062DB6A /* Main.storyboard */,
-				E94F574020A1FAF40062DB6A /* Info.plist */,
-				E94F574120A1FAF40062DB6A /* swiftysign.entitlements */,
 				E94F575520A1FF500062DB6A /* Constants.swift */,
 				E94F575B20A22C050062DB6A /* StringExtension.swift */,
 				E98ECF3120B3199B00532BAE /* SSUtility.swift */,
 				E9E2B40620B473A000AB88B0 /* SSResignSettings.swift */,
+				E94F573B20A1FAF40062DB6A /* Assets.xcassets */,
+				E94F573D20A1FAF40062DB6A /* Main.storyboard */,
+				E94F574020A1FAF40062DB6A /* Info.plist */,
+				E94F574120A1FAF40062DB6A /* swiftysign.entitlements */,
 			);
 			path = swiftysign;
 			sourceTree = "<group>";
@@ -134,12 +170,20 @@
 			path = swiftysignTests;
 			sourceTree = "<group>";
 		};
+		E9E2B40D20B4B79800AB88B0 /* swiftysign */ = {
+			isa = PBXGroup;
+			children = (
+				E9E2B40E20B4B79800AB88B0 /* main.swift */,
+			);
+			path = swiftysign;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E94F573320A1FAF20062DB6A /* swiftysign */ = {
+		E94F573320A1FAF20062DB6A /* swiftysignapp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E94F574F20A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "swiftysign" */;
+			buildConfigurationList = E94F574F20A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "swiftysignapp" */;
 			buildPhases = (
 				E94F573020A1FAF20062DB6A /* Sources */,
 				E94F573120A1FAF20062DB6A /* Frameworks */,
@@ -149,9 +193,9 @@
 			);
 			dependencies = (
 			);
-			name = swiftysign;
+			name = swiftysignapp;
 			productName = swiftysign;
-			productReference = E94F573420A1FAF20062DB6A /* swiftysign.app */;
+			productReference = E94F573420A1FAF20062DB6A /* swiftysignapp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E94F574520A1FAF40062DB6A /* swiftysignTests */ = {
@@ -172,13 +216,30 @@
 			productReference = E94F574620A1FAF40062DB6A /* swiftysignTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		E9E2B40B20B4B79800AB88B0 /* swiftysign */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9E2B41020B4B79800AB88B0 /* Build configuration list for PBXNativeTarget "swiftysign" */;
+			buildPhases = (
+				E9E2B40820B4B79800AB88B0 /* Sources */,
+				E9E2B40920B4B79800AB88B0 /* Frameworks */,
+				E9E2B40A20B4B79800AB88B0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = swiftysign;
+			productName = swiftysign;
+			productReference = E9E2B40C20B4B79800AB88B0 /* swiftysign */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		E94F572C20A1FAF20062DB6A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = mspecht;
 				TargetAttributes = {
@@ -196,6 +257,10 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = E94F573320A1FAF20062DB6A;
 					};
+					E9E2B40B20B4B79800AB88B0 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = E94F572F20A1FAF20062DB6A /* Build configuration list for PBXProject "swiftysign" */;
@@ -211,8 +276,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E94F573320A1FAF20062DB6A /* swiftysign */,
+				E94F573320A1FAF20062DB6A /* swiftysignapp */,
 				E94F574520A1FAF40062DB6A /* swiftysignTests */,
+				E9E2B40B20B4B79800AB88B0 /* swiftysign */,
 			);
 		};
 /* End PBXProject section */
@@ -267,12 +333,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E9E2B40820B4B79800AB88B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9E2B41920B4B86F00AB88B0 /* SSError.swift in Sources */,
+				E9E2B41E20B4B87700AB88B0 /* SSResignSettings.swift in Sources */,
+				E9E2B41320B4B86F00AB88B0 /* SSResigner.swift in Sources */,
+				E9E2B41820B4B86F00AB88B0 /* SSCertificateRetriever.swift in Sources */,
+				E9E2B41520B4B86F00AB88B0 /* SSAppCopier.swift in Sources */,
+				E9E2B41D20B4B87700AB88B0 /* SSUtility.swift in Sources */,
+				E9E2B41620B4B86F00AB88B0 /* SSProvisioningHelper.swift in Sources */,
+				E9E2B41B20B4B87700AB88B0 /* Constants.swift in Sources */,
+				E9E2B41A20B4B86F00AB88B0 /* SSZipper.swift in Sources */,
+				E9E2B41720B4B86F00AB88B0 /* SSEntitlementUpdater.swift in Sources */,
+				E9E2B40F20B4B79800AB88B0 /* main.swift in Sources */,
+				E9E2B41C20B4B87700AB88B0 /* StringExtension.swift in Sources */,
+				E9E2B41420B4B86F00AB88B0 /* SSCodeSigner.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		E94F574820A1FAF40062DB6A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E94F573320A1FAF20062DB6A /* swiftysign */;
+			target = E94F573320A1FAF20062DB6A /* swiftysignapp */;
 			targetProxy = E94F574720A1FAF40062DB6A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -411,7 +497,7 @@
 				INFOPLIST_FILE = swiftysign/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysign;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysignapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -427,7 +513,7 @@
 				INFOPLIST_FILE = swiftysign/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysign;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysignapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -467,6 +553,26 @@
 			};
 			name = Release;
 		};
+		E9E2B41120B4B79800AB88B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 94X7D9LTDY;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		E9E2B41220B4B79800AB88B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 94X7D9LTDY;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -479,7 +585,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E94F574F20A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "swiftysign" */ = {
+		E94F574F20A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "swiftysignapp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E94F575020A1FAF40062DB6A /* Debug */,
@@ -493,6 +599,15 @@
 			buildConfigurations = (
 				E94F575320A1FAF40062DB6A /* Debug */,
 				E94F575420A1FAF40062DB6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E9E2B41020B4B79800AB88B0 /* Build configuration list for PBXNativeTarget "swiftysign" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9E2B41120B4B79800AB88B0 /* Debug */,
+				E9E2B41220B4B79800AB88B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
