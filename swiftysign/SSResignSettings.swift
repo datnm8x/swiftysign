@@ -15,5 +15,6 @@ struct SSResignSettings {
     var certificateName = "" as NSString
     var newBundleId = ""
     var newAppName = ""
+    var changePlistEntry = [(key: String, newValue: String)]()
 }
 

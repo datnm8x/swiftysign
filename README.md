@@ -13,7 +13,7 @@
 
 Re-sign IPAs from ~~command line or~~ an easy-to-use UI. This can be used to create separate apps from the same initial app for testing (for instance, creating a beta app with a different bundle identifier from the production app, but from the same artifact).
 
-> _Down the road the plan is to add the ability to modify custom info.plist values, for example setting a variable for the current app environment._
+> _The command line utility also supports updating any number of Info.plist values. For instance, you can change an environment variable that the app can use to direct the user to a test URL instead of hitting the production URL._
 
 
 
@@ -44,6 +44,7 @@ Command line use is also supported
 > [**-newbundleid** new.bundle.identifier]
 > [**-newappname** NewAppName]
 > [**-entitlements** path/to/entitlements.plist]_
+> [**-newplistvalue** key newValue]_
 
 
 

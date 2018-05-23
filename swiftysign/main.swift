@@ -47,25 +47,30 @@ class SSCommandLineSigner: NSObject, SSResignerDelegate, SSCertificateRetrieverD
         args.removeFirst()
         var settings = SSResignSettings()
         
-        var argumentsAsTuples = [(argname: String, value: String)]()
-        for i in stride(from: 0, to: args.count, by: 2) {
-            argumentsAsTuples.append((argname: args[i].lowercased(), value: args[i+1]))
-        }
-        
-        for tuple in argumentsAsTuples {
-            if tuple.argname == "-archive" {
-                settings.archiveFilePath = tuple.value as NSString
-            } else if tuple.argname == "-provpath" {
-                settings.provisioningFilePath = tuple.value as NSString
-            } else if tuple.argname == "-cert" {
-                settings.certificateName = tuple.value as NSString
-            } else if tuple.argname == "-newappname" {
-                settings.newAppName = tuple.value
-            } else if tuple.argname == "-newbundleid" {
-                settings.newBundleId = tuple.value
-            } else if tuple.argname == "-entitlements" {
-                settings.entitlementPath = tuple.value as NSString
+        var i = 0
+        while i+1 < args.count {
+            let argname = args[i].lowercased()
+            
+            if argname == "-archive" {
+                settings.archiveFilePath = args[i+1] as NSString
+            } else if argname == "-provpath" {
+                settings.provisioningFilePath = args[i+1] as NSString
+            } else if argname == "-cert" {
+                settings.certificateName = args[i+1] as NSString
+            } else if argname == "-newappname" {
+                settings.newAppName = args[i+1]
+            } else if argname == "-newbundleid" {
+                settings.newBundleId = args[i+1]
+            } else if argname == "-entitlements" {
+                settings.entitlementPath = args[i+1] as NSString
+            } else if argname == "-newplistvalue" {
+                if i+2 < args.count {
+                    settings.changePlistEntry.append((key: args[i+1], newValue: args[i+2]))
+                    i += 1
+                }
             }
+            
+            i += 2
         }
         
         return settings
@@ -80,7 +85,7 @@ class SSCommandLineSigner: NSObject, SSResignerDelegate, SSCertificateRetrieverD
         
         print("""
 usage:
-\(executableName) -archive path/to/archive.xcarchive -provpath path/to/provision.mobileprovision -cert certificatename [-newbundleid new.bundle.identifier] [-newappname NewAppName] [-entitlements path/to/entitlements.plist]
+\(executableName) -archive path/to/archive.xcarchive -provpath path/to/provision.mobileprovision -cert certificatename [-newbundleid new.bundle.identifier] [-newappname NewAppName] [-entitlements path/to/entitlements.plist] [-newplistvalue key newvalue]
 """)
     }
     

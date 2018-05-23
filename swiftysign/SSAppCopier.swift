@@ -15,9 +15,7 @@ protocol SSAppCopierDelegate: class {
 
 class SSAppCopier: NSObject {
     
-    private var newAppName: String!
-    private var newBundleId: String!
-    private var archiveFilePath: NSString!
+    private var settings: SSResignSettings!
     
     private weak var delegate: SSAppCopierDelegate?
     
@@ -28,9 +26,7 @@ class SSAppCopier: NSObject {
     
     func copyArchive(settings: SSResignSettings) {
         
-        self.newAppName = settings.newAppName
-        self.newBundleId = settings.newBundleId
-        self.archiveFilePath = settings.archiveFilePath
+        self.settings = settings
         
         let payloadPath = SSResigner.workingPath.appendingPathComponent(kPayloadDirName)
         delegate?.updateProgress(animate: true, message: NSLocalizedString("Setting up \(kPayloadDirName) path in \(payloadPath)", comment: ""))
@@ -60,12 +56,17 @@ class SSAppCopier: NSObject {
         print("Copy done")
         delegate?.updateProgress(animate: true, message: NSLocalizedString("xcarchive copied", comment: ""))
         
-        if newBundleId.length() > 0 {
+        for updatePlistEntry in settings.changePlistEntry {
+            let infoPlistPath = SSResigner.appPath.appending("/\(kInfoPlistFilename)")
+            updatePlist(filePath: infoPlistPath, key: updatePlistEntry.key, value: updatePlistEntry.newValue)
+        }
+        
+        if settings.newBundleId.length() > 0 {
             changeAppBundleID()
             changeMetaDataBundleID()
         }
         
-        if newAppName.length() > 0 {
+        if settings.newAppName.length() > 0 {
             changeDisplayName()
         }
         
@@ -77,7 +78,7 @@ class SSAppCopier: NSObject {
         let infoPlistPath = SSResigner.appPath.appending("/\(kInfoPlistFilename)")
         
         updatePlist(filePath: infoPlistPath, key: kFileSharingEnabledName, value: true)
-        updatePlist(filePath: infoPlistPath, key: kKeyBundleIDPlistApp, value: newBundleId)
+        updatePlist(filePath: infoPlistPath, key: kKeyBundleIDPlistApp, value: settings.newBundleId)
     }
     
     private func updatePlist(filePath: String, key: String, value: Any) {
@@ -104,7 +105,7 @@ class SSAppCopier: NSObject {
             }
         }
         
-        updatePlist(filePath: infoPlistPath, key: kKeyBundleIDPlistiTunesArtwork, value: newBundleId)
+        updatePlist(filePath: infoPlistPath, key: kKeyBundleIDPlistiTunesArtwork, value: settings.newBundleId)
     }
     
     private func changeDisplayName() {
@@ -115,7 +116,7 @@ class SSAppCopier: NSObject {
         for case let file as NSString in SSResigner.directoryContents {
             if file.pathExtension.lowercased() == "plist" {
                 let infoPlistPath = SSResigner.workingPath.appendingPathComponent(file as String)
-                updatePlist(filePath: infoPlistPath, key: kKeyBundleDisplayNamePlistiTunesArtwork, value: newAppName)
+                updatePlist(filePath: infoPlistPath, key: kKeyBundleDisplayNamePlistiTunesArtwork, value: settings.newAppName)
                 break
             }
         }
@@ -136,18 +137,18 @@ class SSAppCopier: NSObject {
         
         for filePath in stringsFiles {
             if FileManager.default.fileExists(atPath: filePath) {
-                updatePlist(filePath: filePath, key: kKeyBundleDisplayNameApp, value: newAppName)
+                updatePlist(filePath: filePath, key: kKeyBundleDisplayNameApp, value: settings.newAppName)
             }
         }
     }
     
     private func updateAppPlist() {
         let infoPlistPath = "\(SSResigner.appPath)/\(kInfoPlistFilename)"
-        updatePlist(filePath: infoPlistPath, key: kKeyBundleDisplayNameApp, value: newAppName)
+        updatePlist(filePath: infoPlistPath, key: kKeyBundleDisplayNameApp, value: settings.newAppName)
     }
     
     private func getApplicationPath() throws -> String {
-        let infoPlistPath = archiveFilePath.appendingPathComponent(kInfoPlistFilename)
+        let infoPlistPath = settings.archiveFilePath.appendingPathComponent(kInfoPlistFilename)
         let infoPlistDictionary = NSDictionary(contentsOfFile: infoPlistPath)
         
         guard infoPlistDictionary != nil && infoPlistDictionary![kKeyInfoPlistApplicationProperties] != nil else {
@@ -156,7 +157,7 @@ class SSAppCopier: NSObject {
         
         let applicationPropertiesDict = infoPlistDictionary![kKeyInfoPlistApplicationProperties] as! NSDictionary
         var applicationPath = applicationPropertiesDict[kKeyInfoPlistApplicationPath] as! String
-        applicationPath = (archiveFilePath.appendingPathComponent(kProductsDirName) as NSString).appendingPathComponent(applicationPath)
+        applicationPath = (settings.archiveFilePath.appendingPathComponent(kProductsDirName) as NSString).appendingPathComponent(applicationPath)
         
         return applicationPath
     }
