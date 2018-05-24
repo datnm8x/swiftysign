@@ -8,22 +8,6 @@
 
 import Foundation
 
-enum Arguments: String {
-    case palindrome = "p"
-    case anagram = "a"
-    case help = "h"
-    case unknown
-    
-    init(value: String) {
-        switch value {
-        case "a": self = .anagram
-        case "p": self = .palindrome
-        case "h": self = .help
-        default: self = .unknown
-        }
-    }
-}
-
 class SSCommandLineSigner: NSObject, SSResignerDelegate, SSCertificateRetrieverDelegate {
     
     var resigner: SSResigner!
@@ -35,7 +19,6 @@ class SSCommandLineSigner: NSObject, SSResignerDelegate, SSCertificateRetrieverD
         let settings = resignerSettingsFrom(arguments: CommandLine.arguments)
         
         if validateRequiredSettings(settings) {
-//            CFRunLoopRun();
             resigner.resign(resignerSettings: settings)
         } else {
             printUsage()
