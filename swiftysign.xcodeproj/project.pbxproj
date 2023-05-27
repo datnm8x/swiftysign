@@ -64,14 +64,14 @@
 
 /* Begin PBXFileReference section */
 		E91F399520A4D9FC003BE539 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		E94F573420A1FAF20062DB6A /* swiftysignapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftysignapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E94F573420A1FAF20062DB6A /* SwiftySign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftySign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94F573720A1FAF20062DB6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E94F573920A1FAF20062DB6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E94F573B20A1FAF40062DB6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E94F573E20A1FAF40062DB6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E94F574020A1FAF40062DB6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E94F574120A1FAF40062DB6A /* swiftysign.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swiftysign.entitlements; sourceTree = "<group>"; };
-		E94F574620A1FAF40062DB6A /* swiftysignTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftysignTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E94F574620A1FAF40062DB6A /* SwiftySignTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftySignTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94F574A20A1FAF40062DB6A /* swiftysignTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftysignTests.swift; sourceTree = "<group>"; };
 		E94F574C20A1FAF40062DB6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E94F575520A1FF500062DB6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 		E9E2B40220B46A0400AB88B0 /* SSError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSError.swift; sourceTree = "<group>"; };
 		E9E2B40420B470CB00AB88B0 /* SSAppCopier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSAppCopier.swift; sourceTree = "<group>"; };
 		E9E2B40620B473A000AB88B0 /* SSResignSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSResignSettings.swift; sourceTree = "<group>"; };
-		E9E2B40C20B4B79800AB88B0 /* swiftysign */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftysign; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9E2B40C20B4B79800AB88B0 /* SwiftySignCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftySignCLI; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9E2B40E20B4B79800AB88B0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,9 +129,9 @@
 		E94F573520A1FAF20062DB6A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E94F573420A1FAF20062DB6A /* swiftysignapp.app */,
-				E94F574620A1FAF40062DB6A /* swiftysignTests.xctest */,
-				E9E2B40C20B4B79800AB88B0 /* swiftysign */,
+				E94F573420A1FAF20062DB6A /* SwiftySign.app */,
+				E94F574620A1FAF40062DB6A /* SwiftySignTests.xctest */,
+				E9E2B40C20B4B79800AB88B0 /* SwiftySignCLI */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -181,9 +181,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E94F573320A1FAF20062DB6A /* swiftysignapp */ = {
+		E94F573320A1FAF20062DB6A /* SwiftySign */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E94F574F20A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "swiftysignapp" */;
+			buildConfigurationList = E94F574F20A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "SwiftySign" */;
 			buildPhases = (
 				E94F573020A1FAF20062DB6A /* Sources */,
 				E94F573120A1FAF20062DB6A /* Frameworks */,
@@ -193,14 +193,14 @@
 			);
 			dependencies = (
 			);
-			name = swiftysignapp;
+			name = SwiftySign;
 			productName = swiftysign;
-			productReference = E94F573420A1FAF20062DB6A /* swiftysignapp.app */;
+			productReference = E94F573420A1FAF20062DB6A /* SwiftySign.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E94F574520A1FAF40062DB6A /* swiftysignTests */ = {
+		E94F574520A1FAF40062DB6A /* SwiftySignTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E94F575220A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "swiftysignTests" */;
+			buildConfigurationList = E94F575220A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "SwiftySignTests" */;
 			buildPhases = (
 				E94F574220A1FAF40062DB6A /* Sources */,
 				E94F574320A1FAF40062DB6A /* Frameworks */,
@@ -211,14 +211,14 @@
 			dependencies = (
 				E94F574820A1FAF40062DB6A /* PBXTargetDependency */,
 			);
-			name = swiftysignTests;
+			name = SwiftySignTests;
 			productName = swiftysignTests;
-			productReference = E94F574620A1FAF40062DB6A /* swiftysignTests.xctest */;
+			productReference = E94F574620A1FAF40062DB6A /* SwiftySignTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E9E2B40B20B4B79800AB88B0 /* swiftysign */ = {
+		E9E2B40B20B4B79800AB88B0 /* SwiftySignCLI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E9E2B41020B4B79800AB88B0 /* Build configuration list for PBXNativeTarget "swiftysign" */;
+			buildConfigurationList = E9E2B41020B4B79800AB88B0 /* Build configuration list for PBXNativeTarget "SwiftySignCLI" */;
 			buildPhases = (
 				E9E2B40820B4B79800AB88B0 /* Sources */,
 				E9E2B40920B4B79800AB88B0 /* Frameworks */,
@@ -228,9 +228,9 @@
 			);
 			dependencies = (
 			);
-			name = swiftysign;
+			name = SwiftySignCLI;
 			productName = swiftysign;
-			productReference = E9E2B40C20B4B79800AB88B0 /* swiftysign */;
+			productReference = E9E2B40C20B4B79800AB88B0 /* SwiftySignCLI */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -245,7 +245,7 @@
 				TargetAttributes = {
 					E94F573320A1FAF20062DB6A = {
 						CreatedOnToolsVersion = 9.3;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 0;
@@ -263,7 +263,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E94F572F20A1FAF20062DB6A /* Build configuration list for PBXProject "swiftysign" */;
+			buildConfigurationList = E94F572F20A1FAF20062DB6A /* Build configuration list for PBXProject "SwiftySign" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -276,9 +276,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E94F573320A1FAF20062DB6A /* swiftysignapp */,
-				E94F574520A1FAF40062DB6A /* swiftysignTests */,
-				E9E2B40B20B4B79800AB88B0 /* swiftysign */,
+				E94F573320A1FAF20062DB6A /* SwiftySign */,
+				E94F574520A1FAF40062DB6A /* SwiftySignTests */,
+				E9E2B40B20B4B79800AB88B0 /* SwiftySignCLI */,
 			);
 		};
 /* End PBXProject section */
@@ -358,7 +358,7 @@
 /* Begin PBXTargetDependency section */
 		E94F574820A1FAF40062DB6A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E94F573320A1FAF20062DB6A /* swiftysignapp */;
+			target = E94F573320A1FAF20062DB6A /* SwiftySign */;
 			targetProxy = E94F574720A1FAF40062DB6A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -491,14 +491,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 94X7D9LTDY;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = swiftysign/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysignapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -507,14 +509,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 94X7D9LTDY;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = swiftysign/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysignapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
@@ -532,7 +536,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysignTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/swiftysign.app/Contents/MacOS/swiftysign";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftySign.app/Contents/MacOS/SwiftySign";
 			};
 			name = Debug;
 		};
@@ -549,7 +553,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mspecht.swiftysignTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/swiftysign.app/Contents/MacOS/swiftysign";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftySign.app/Contents/MacOS/SwiftySign";
 			};
 			name = Release;
 		};
@@ -576,7 +580,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E94F572F20A1FAF20062DB6A /* Build configuration list for PBXProject "swiftysign" */ = {
+		E94F572F20A1FAF20062DB6A /* Build configuration list for PBXProject "SwiftySign" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E94F574D20A1FAF40062DB6A /* Debug */,
@@ -585,7 +589,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E94F574F20A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "swiftysignapp" */ = {
+		E94F574F20A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "SwiftySign" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E94F575020A1FAF40062DB6A /* Debug */,
@@ -594,7 +598,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E94F575220A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "swiftysignTests" */ = {
+		E94F575220A1FAF40062DB6A /* Build configuration list for PBXNativeTarget "SwiftySignTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E94F575320A1FAF40062DB6A /* Debug */,
@@ -603,7 +607,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E9E2B41020B4B79800AB88B0 /* Build configuration list for PBXNativeTarget "swiftysign" */ = {
+		E9E2B41020B4B79800AB88B0 /* Build configuration list for PBXNativeTarget "SwiftySignCLI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E9E2B41120B4B79800AB88B0 /* Debug */,
